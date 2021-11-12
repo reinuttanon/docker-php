@@ -1,0 +1,24 @@
+version: '3.1'
+services:
+  www:
+    build: .
+    restart: always
+    ports:
+      - 8080:80
+    volumes:
+      - ./app:/var/www/html/
+
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: www
+      MYSQL_USER: wwwdb_user
+      MYSQL_PASSWORD: wwwdb_password
+      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+    volumes:
+      - db:/var/lib/mysql
+
+volumes:
+  www:
+  db:
